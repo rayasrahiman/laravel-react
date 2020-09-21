@@ -13,21 +13,21 @@ import {
 } from "reactstrap";
 import axios from "axios";
 
-export default class Example extends Component {
+export default class Main extends Component {
     constructor() {
         super();
         this.state = {
             tasks: [],
             newTaskModal: false,
             newTaskData: {
-                name: '',
-                description: ''
+                name: "",
+                description: ""
             },
-            editTaskModal:false,
-            editTaskData:{
-                id:'',
-                name:'',
-                description:''
+            editTaskModal: false,
+            editTaskData: {
+                id: "",
+                name: "",
+                description: ""
             }
         };
     }
@@ -40,56 +40,63 @@ export default class Example extends Component {
         });
     }
 
-    addTask(){
-        axios.post('http://127.0.0.1:8000/api/task', this.state.newTaskData).then(response => {
-            let {tasks} = this.state
-            this.loadTask()
+    addTask() {
+        axios
+            .post("http://127.0.0.1:8000/api/task", this.state.newTaskData)
+            .then(response => {
+                let { tasks } = this.state;
+                this.loadTask();
 
-            this.setState({
-                tasks,
-                newTaskModal: false,
-                newTaskData:{
-                    name: '',
-                    description:''
-                }
-            })
-        })
+                this.setState({
+                    tasks,
+                    newTaskModal: false,
+                    newTaskData: {
+                        name: "",
+                        description: ""
+                    }
+                });
+            });
     }
 
-    editTask(id, name, description){
+    editTask(id, name, description) {
         console.log(id);
         this.setState({
-            editTaskData:{
+            editTaskData: {
                 id,
                 name,
                 description
             },
             editTaskModal: !this.state.editTaskModal
-        })
+        });
     }
 
-    updateTask(){
-        let {id, name, description} = this.state.editTaskData
-        axios.put('http://127.0.0.1:8000/api/task/'+this.state.editTaskData.id, {
-            name,
-            description
-        }).then((response) => {
-            this.loadTask()
-            this.setState({
-                editTaskModal: false,
-                editTaskData:{
-                    id:'',
-                    name:'',
-                    description:''
+    updateTask() {
+        let { id, name, description } = this.state.editTaskData;
+        axios
+            .put(
+                "http://127.0.0.1:8000/api/task/" + this.state.editTaskData.id,
+                {
+                    name,
+                    description
                 }
-            })
-        })
+            )
+            .then(response => {
+                this.loadTask();
+                this.setState({
+                    editTaskModal: false,
+                    editTaskData: {
+                        id: "",
+                        name: "",
+                        description: ""
+                    }
+                });
+            });
     }
 
-    deleteTask(id){
-        axios.delete('http://127.0.0.1:8000/api/task/'+id).then((response) => {
-            this.loadTask()
-        })
+    deleteTask(id) {
+        axios.delete("http://127.0.0.1:8000/api/task/" + id).then(response => {
+            this.loadTask();
+        });
     }
 
     componentWillMount() {
@@ -101,7 +108,7 @@ export default class Example extends Component {
             newTaskModal: !this.state.newTaskModal
         });
     }
-    
+
     toggleEditTaskModal() {
         this.setState({
             editTaskModal: !this.state.editTaskModal
@@ -116,10 +123,24 @@ export default class Example extends Component {
                     <td>{task.name}</td>
                     <td>{task.description}</td>
                     <td>
-                        <Button color="success" size="sm" className="mr-2" onClick={this.editTask.bind(this, task.id, task.name, task.description)}>
+                        <Button
+                            color="success"
+                            size="sm"
+                            className="mr-2"
+                            onClick={this.editTask.bind(
+                                this,
+                                task.id,
+                                task.name,
+                                task.description
+                            )}
+                        >
                             Edit
                         </Button>
-                        <Button color="danger" size="sm" onClick={this.deleteTask.bind(this, task.id)}>
+                        <Button
+                            color="danger"
+                            size="sm"
+                            onClick={this.deleteTask.bind(this, task.id)}
+                        >
                             Delete
                         </Button>
                     </td>
@@ -131,7 +152,8 @@ export default class Example extends Component {
                 <h1>ToDo List</h1>
                 <Button
                     color="primary"
-                    onClick={this.toggleNewTaskModal.bind(this)} className="my-3"
+                    onClick={this.toggleNewTaskModal.bind(this)}
+                    className="my-3"
                 >
                     Add Task
                 </Button>
@@ -140,25 +162,33 @@ export default class Example extends Component {
                     toggle={this.toggleNewTaskModal.bind(this)}
                 >
                     <ModalHeader toggle={this.toggleNewTaskModal.bind(this)}>
-                    Add Task
+                        Add Task
                     </ModalHeader>
                     <ModalBody>
                         <FormGroup>
                             <Label for="name">Name</Label>
-                            <Input id="name" value={this.state.newTaskData.name} onChange={e => {
-                        let {newTaskData} = this.state 
-                        newTaskData.name = e.target.value 
-                        this.setState({newTaskData})}}></Input>
+                            <Input
+                                id="name"
+                                value={this.state.newTaskData.name}
+                                onChange={e => {
+                                    let { newTaskData } = this.state;
+                                    newTaskData.name = e.target.value;
+                                    this.setState({ newTaskData });
+                                }}
+                            ></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="description">Description</Label>
-                            <Input id="description" value={this.state.newTaskData.description}
-                            onChange={e =>{ let {newTaskData} = this.state 
-                            newTaskData.description = e.target.value 
-                            this.setState({newTaskData
-                            })}}></Input>
+                            <Input
+                                id="description"
+                                value={this.state.newTaskData.description}
+                                onChange={e => {
+                                    let { newTaskData } = this.state;
+                                    newTaskData.description = e.target.value;
+                                    this.setState({ newTaskData });
+                                }}
+                            ></Input>
                         </FormGroup>
-                        
                     </ModalBody>
                     <ModalFooter>
                         <Button
@@ -181,25 +211,33 @@ export default class Example extends Component {
                     toggle={this.toggleEditTaskModal.bind(this)}
                 >
                     <ModalHeader toggle={this.toggleEditTaskModal.bind(this)}>
-                    Edit Task
+                        Edit Task
                     </ModalHeader>
                     <ModalBody>
                         <FormGroup>
                             <Label for="name">Name</Label>
-                            <Input id="name" value={this.state.editTaskData.name} onChange={e => {
-                        let {editTaskData} = this.state 
-                        editTaskData.name = e.target.value 
-                        this.setState({editTaskData})}}></Input>
+                            <Input
+                                id="name"
+                                value={this.state.editTaskData.name}
+                                onChange={e => {
+                                    let { editTaskData } = this.state;
+                                    editTaskData.name = e.target.value;
+                                    this.setState({ editTaskData });
+                                }}
+                            ></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="description">Description</Label>
-                            <Input id="description" value={this.state.editTaskData.description}
-                            onChange={e =>{ let {editTaskData} = this.state 
-                            editTaskData.description = e.target.value 
-                            this.setState({editTaskData
-                            })}}></Input>
+                            <Input
+                                id="description"
+                                value={this.state.editTaskData.description}
+                                onChange={e => {
+                                    let { editTaskData } = this.state;
+                                    editTaskData.description = e.target.value;
+                                    this.setState({ editTaskData });
+                                }}
+                            ></Input>
                         </FormGroup>
-                        
                     </ModalBody>
                     <ModalFooter>
                         <Button
@@ -232,6 +270,6 @@ export default class Example extends Component {
     }
 }
 
-if (document.getElementById("example")) {
-    ReactDOM.render(<Example />, document.getElementById("example"));
+if (document.getElementById("main")) {
+    ReactDOM.render(<Main />, document.getElementById("main"));
 }

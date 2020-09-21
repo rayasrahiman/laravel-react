@@ -80115,7 +80115,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+__webpack_require__(/*! ./components/Main */ "./resources/js/components/Main.js");
 
 /***/ }),
 
@@ -80147,7 +80147,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -80157,9 +80157,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common["X-CSRF-TOKEN"] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error("CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token");
 }
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -80177,16 +80177,16 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
+/***/ "./resources/js/components/Main.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Main.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Example; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Main; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -80221,35 +80221,35 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Example = /*#__PURE__*/function (_Component) {
-  _inherits(Example, _Component);
+var Main = /*#__PURE__*/function (_Component) {
+  _inherits(Main, _Component);
 
-  var _super = _createSuper(Example);
+  var _super = _createSuper(Main);
 
-  function Example() {
+  function Main() {
     var _this;
 
-    _classCallCheck(this, Example);
+    _classCallCheck(this, Main);
 
     _this = _super.call(this);
     _this.state = {
       tasks: [],
       newTaskModal: false,
       newTaskData: {
-        name: '',
-        description: ''
+        name: "",
+        description: ""
       },
       editTaskModal: false,
       editTaskData: {
-        id: '',
-        name: '',
-        description: ''
+        id: "",
+        name: "",
+        description: ""
       }
     };
     return _this;
   }
 
-  _createClass(Example, [{
+  _createClass(Main, [{
     key: "loadTask",
     value: function loadTask() {
       var _this2 = this;
@@ -80265,7 +80265,7 @@ var Example = /*#__PURE__*/function (_Component) {
     value: function addTask() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('http://127.0.0.1:8000/api/task', this.state.newTaskData).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("http://127.0.0.1:8000/api/task", this.state.newTaskData).then(function (response) {
         var tasks = _this3.state.tasks;
 
         _this3.loadTask();
@@ -80274,8 +80274,8 @@ var Example = /*#__PURE__*/function (_Component) {
           tasks: tasks,
           newTaskModal: false,
           newTaskData: {
-            name: '',
-            description: ''
+            name: "",
+            description: ""
           }
         });
       });
@@ -80302,7 +80302,7 @@ var Example = /*#__PURE__*/function (_Component) {
           id = _this$state$editTaskD.id,
           name = _this$state$editTaskD.name,
           description = _this$state$editTaskD.description;
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.put('http://127.0.0.1:8000/api/task/' + this.state.editTaskData.id, {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.put("http://127.0.0.1:8000/api/task/" + this.state.editTaskData.id, {
         name: name,
         description: description
       }).then(function (response) {
@@ -80311,9 +80311,9 @@ var Example = /*#__PURE__*/function (_Component) {
         _this4.setState({
           editTaskModal: false,
           editTaskData: {
-            id: '',
-            name: '',
-            description: ''
+            id: "",
+            name: "",
+            description: ""
           }
         });
       });
@@ -80323,7 +80323,7 @@ var Example = /*#__PURE__*/function (_Component) {
     value: function deleteTask(id) {
       var _this5 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]('http://127.0.0.1:8000/api/task/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]("http://127.0.0.1:8000/api/task/" + id).then(function (response) {
         _this5.loadTask();
       });
     }
@@ -80449,13 +80449,13 @@ var Example = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return Example;
+  return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
 
-if (document.getElementById("example")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById("example"));
+if (document.getElementById("main")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Main, null), document.getElementById("main"));
 }
 
 /***/ }),
@@ -80478,8 +80478,8 @@ if (document.getElementById("example")) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\laravel-react-crud\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\laravel-react-crud\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Github Projects\laravel-react\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Github Projects\laravel-react\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
